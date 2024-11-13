@@ -218,7 +218,7 @@ class AmqpContext implements InteropAmqpContext, DelayStrategyAware
             $this->getBunnyChannel()->exchangeBind(
                 $bind->getTarget()->getTopicName(),
                 $bind->getSource()->getTopicName(),
-                $bind->getRoutingKey(),
+                $bind->getRoutingKey() === null ? '' : $bind->getRoutingKey(),
                 (bool) ($bind->getFlags() & InteropAmqpBind::FLAG_NOWAIT),
                 $bind->getArguments()
             );
@@ -227,7 +227,7 @@ class AmqpContext implements InteropAmqpContext, DelayStrategyAware
             $this->getBunnyChannel()->queueBind(
                 $bind->getSource()->getQueueName(),
                 $bind->getTarget()->getTopicName(),
-                $bind->getRoutingKey(),
+                $bind->getRoutingKey() === null ? '' : $bind->getRoutingKey(),
                 (bool) ($bind->getFlags() & InteropAmqpBind::FLAG_NOWAIT),
                 $bind->getArguments()
             );
@@ -236,7 +236,7 @@ class AmqpContext implements InteropAmqpContext, DelayStrategyAware
             $this->getBunnyChannel()->queueBind(
                 $bind->getTarget()->getQueueName(),
                 $bind->getSource()->getTopicName(),
-                $bind->getRoutingKey(),
+                $bind->getRoutingKey() === null ? '' : $bind->getRoutingKey(),
                 (bool) ($bind->getFlags() & InteropAmqpBind::FLAG_NOWAIT),
                 $bind->getArguments()
             );
@@ -254,7 +254,7 @@ class AmqpContext implements InteropAmqpContext, DelayStrategyAware
             $this->getBunnyChannel()->exchangeUnbind(
                 $bind->getTarget()->getTopicName(),
                 $bind->getSource()->getTopicName(),
-                $bind->getRoutingKey(),
+                $bind->getRoutingKey() === null ? '' : $bind->getRoutingKey(),
                 (bool) ($bind->getFlags() & InteropAmqpBind::FLAG_NOWAIT),
                 $bind->getArguments()
             );
@@ -263,7 +263,7 @@ class AmqpContext implements InteropAmqpContext, DelayStrategyAware
             $this->getBunnyChannel()->queueUnbind(
                 $bind->getSource()->getQueueName(),
                 $bind->getTarget()->getTopicName(),
-                $bind->getRoutingKey(),
+                $bind->getRoutingKey() === null ? '' : $bind->getRoutingKey(),
                 $bind->getArguments()
             );
         // bind exchange to queue
@@ -271,7 +271,7 @@ class AmqpContext implements InteropAmqpContext, DelayStrategyAware
             $this->getBunnyChannel()->queueUnbind(
                 $bind->getTarget()->getQueueName(),
                 $bind->getSource()->getTopicName(),
-                $bind->getRoutingKey(),
+                $bind->getRoutingKey() === null ? '' : $bind->getRoutingKey(),
                 $bind->getArguments()
             );
         }
